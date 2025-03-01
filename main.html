@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAWING</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Right-side menu (dashboard-style) -->
+        <div class="menu" id="menu">
+            <input type="color" id="color-picker" value="#000000"> <!-- Color picker -->
+            <input type="button" class="button" value="Add Color" id="add-color-button"> <!-- Button to add the selected color -->
+            <input type="button" class="button" value="Clear Grid" id="clear-button"> <!-- Button to clear the grid -->
+            <input type="button" class="button" value="Delete" id="delete-button"> <!-- Button to delete selected color -->
+            <div id="color-swatches" class="color-swatches"></div>
+            <p class="info">Please clear the pixel before you draw.</p> <!-- Color swatches will appear here -->
+        </div>
+
+        <!-- Pixel grid container -->
+        <div class="grid-container">
+            <!-- 700 pixel boxes will be added dynamically by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const gridContainer = document.querySelector('.grid-container');
+        const colorPicker = document.getElementById('color-picker');
+        const clearButton = document.getElementById('clear-button');
+        const addColorButton = document.getElementById('add-color-button');
+        const colorSwatches = document.getElementById('color-swatches');
+        const deleteButton = document.getElementById('delete-button');
+
+        let selectedColorSwatch = null; // Keeps track of the selected color swatch
+        let activeColor = '#000000'; // Default drawing color
+
+        // Dynamically add 1920 grid-box divs
+        for (let i = 0; i < 1914; i++) {
+            const box = document.createElement('div');
+            box.classList.add('grid-box');
+            box.addEventListener('click', () => {
+                // Color the box with the active color
+                box.style.backgroundColor = activeColor;
+            });
+            gridContainer.appendChild(box);
+        }
+
+        // Clear all boxes when the "Clear Grid" button is clicked
+        clearButton.addEventListener('click', () => {
+            const boxes = document.querySelectorAll('.grid-box');
+            boxes.forEach(box => box.style.backgroundColor = '#ddd'); // Reset to default color
+        });
+
+        // Handle the "Add Color" button click event
+        addColorButton.addEventListener('click', () => {
+            const selectedColor = colorPicker.value;
+            
+            // Create a new swatch to display the selected color
+            const colorSwatch = document.createElement('div');
+            colorSwatch.classList.add('color-swatch');
+            colorSwatch.style.backgroundColor = selectedColor;
+
+            // Add event listener for selecting the color to draw
+            colorSwatch.addEventListener('click', () => {
+                // Set this color as the active color for the grid
+                activeColor = selectedColor;
+
+                // Remove the highlight from the previously selected color
+                if (selectedColorSwatch) {
+                    selectedColorSwatch.classList.remove('selected');
+                }
+
+                // Highlight the clicked color swatch
+                selectedColorSwatch = colorSwatch;
+                selectedColorSwatch.classList.add('selected');
+            });
+
+            // Add the swatch to the color swatches container
+            colorSwatches.appendChild(colorSwatch);
+        });
+
+        // Handle the "Delete" button click event
+        deleteButton.addEventListener('click', () => {
+            if (selectedColorSwatch) {
+                // Remove the selected color swatch from the list
+                selectedColorSwatch.remove();
+                selectedColorSwatch = null; // Clear the selected swatch
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.info{
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: green;
+}
+/* Main container */
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Right-side menu (dashboard) */
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Menu button styles */
+.menu input[type="color"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.menu input[type="button"] {
+    padding: 10px 15px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px; /* Add margin between buttons */
+}
+
+.menu input[type="button"]:hover {
+    background-color: darkgreen;
+}
+
+/* Color swatches container */
+.color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Color swatch styling */
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+
+/* Delete button styling */
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* Grid layout for pixel boxes */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(58, 20px);  /* 54 columns, each 20px */
+    grid-template-rows: repeat(20, 20px);     /* 20 rows, each 20px */
+    gap: 0px;                                 /* Remove the gap between the boxes */
+    margin-left: 0;                           /* Space for the fixed right-side menu */
+}
+
+.grid-box {
+    width: 20px;
+    height: 20px;
+    background-color: #555;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .menu {
+        max-width: 150px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(30, 20px); /* Reduce number of columns on smaller screens */
+        grid-template-rows: repeat(20, 20px);
+    }
+
+    .grid-box {
+        width: 18px; /* Slightly smaller boxes */
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu {
+        max-width: 120px;
+        width: 100%;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(20, 18px); /* Further reduce columns */
+        grid-template-rows: repeat(20, 18px);
+    }
+
+    .grid-box {
+        width: 16px; /* Further reduce box size */
+        height: 16px;
+    }
+
+    .menu input[type="color"],
+    .menu .button {
+        width: 100%; /* Make buttons and inputs full width */
+    }
+}
+
+/* For very small screens like mobile phones in portrait mode */
+@media (max-width: 320px) {
+    .menu {
+        max-width: 100%;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(15, 16px); /* Even fewer columns on very small screens */
+        grid-template-rows: repeat(20, 16px);
+    }
+
+    .grid-box {
+        width: 14px; /* Even smaller boxes */
+        height: 14px;
+    }
+
+    .menu input[type="color"],
+    .menu .button {
+        font-size: 12px; /* Adjust font size for smaller screens */
+        padding: 6px 0;
+    }
+}
